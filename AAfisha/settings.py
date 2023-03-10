@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Afisha.wsgi.application'
+WSGI_APPLICATION = 'AAfisha.wsgi.application'
 
 
 # Database
