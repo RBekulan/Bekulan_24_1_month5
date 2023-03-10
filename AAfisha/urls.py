@@ -13,17 +13,40 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
-from movie_app import views
+from movie_app.views import *
+from user.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/movies/', views.movies_view),
-    path('api/v1/director/', views.director_view),
-    path('api/v1/reviews/', views.reviews_view),
-    path('api/v1/reviews/<int:id>/', views.review_detail_view),
-    path('api/v1/movies/<int:id>/', views.movies_detail_view),
-    path('api/v1/director/<int:id>/', views.director_detail_view),
-    path('api/v1/movies/reviews/', views.review_movies_view),
+    path('api/v1/directors/', DirectorListAPIView.as_view()),
+    path('api/v1/directors/<int:pk>/', DirectorDetailAPIView.as_view()),
+    path('api/v1/movies/', MovieListAPIView.as_view()),
+    path('api/v1/movies/<int:pk>/', MovieDetailAPIView.as_view()),
+    path('api/v1/reviews/', ReviewListAPIView.as_view()),
+    path('api/v1/reviews/<int:pk>/', ReviewDetailAPIView.as_view()),
+    path('api/v1/movies/reviews/', ReviewMoviesView.as_view()),
+    path('api/v1/users/registration/', RegistrationAPIView.as_view()),
+    path('api/v1/users/confirm/', ConfirmUserAPIView.as_view()),
+    path('api/v1/users/authorization/', AuthorizationAPIView.as_view()),
 ]
+
+
+
+
+# from django.contrib import admin
+# from django.urls import path
+# from movie_app import views
+#
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('api/v1/movies/', views.movies_view),
+#     path('api/v1/director/', views.director_view),
+#     path('api/v1/reviews/', views.reviews_view),
+#     path('api/v1/reviews/<int:id>/', views.review_detail_view),
+#     path('api/v1/movies/<int:id>/', views.movies_detail_view),
+#     path('api/v1/director/<int:id>/', views.director_detail_view),
+#     path('api/v1/movies/reviews/', views.review_movies_view),
+# ]
