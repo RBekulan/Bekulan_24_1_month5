@@ -12,7 +12,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -23,7 +22,6 @@ SECRET_KEY = 'django-insecure-ojx3z9nkt+^9ck5rrv-y#+6i$!&n)hkx60#92gvwlgne=z17uu
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -38,11 +36,12 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'movie_app',
     'user',
+    'drf_yasg',
+
 ]
 
-
 REST_FRAMEWORK = {
-    'DEFAULT_AUTENTICATION_CLASSES':[
+    'DEFAULT_AUTENTICATION_CLASSES': [
         'rest_framework.autentication.TokenAutentication'
     ]
 }
@@ -78,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'AAfisha.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -88,7 +86,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -108,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -120,7 +116,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -130,8 +125,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
 
 # """
 # Django settings for AAfisha project.

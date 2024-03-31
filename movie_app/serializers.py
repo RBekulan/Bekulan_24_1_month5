@@ -66,7 +66,6 @@ class ReviewValidatorCreate(serializers.Serializer):
 class DirectorValidatorCreate(serializers.Serializer):
     name = serializers.CharField(max_length=150)
 
-
 # from rest_framework import serializers
 # from movie_app.models import *
 #
