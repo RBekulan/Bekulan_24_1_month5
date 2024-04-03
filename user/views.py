@@ -10,9 +10,21 @@ from .serializers import *
 from rest_framework import status
 
 
-class RegistrationAPIView(APIView):
-    def post(self, request):
-        serializer = UserRegisterSerializer(data=request.data)
+from rest_framework.generics import ListAPIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import login
+from rest_framework.authtoken.models import Token
+from .serializers import UserRegisterSerializer, UserLoginSerializer
+from .models import UserConfirmation
+import random
+
+class RegistrationAPIView(ListAPIView):
+    serializer_class = UserRegisterSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save(is_active=False)
             confirmation = UserConfirmation.objects.create(user=user, code=random.randint(100000, 999999))
@@ -20,8 +32,8 @@ class RegistrationAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ConfirmUserAPIView(APIView):
-    def post(self, request):
+class ConfirmUserAPIView(ListAPIView):
+    def post(self, request, *args, **kwargs):
         code = request.data.get('code', None)
         confirmation = get_object_or_404(UserConfirmation, code=code)
         user = confirmation.user
@@ -31,9 +43,11 @@ class ConfirmUserAPIView(APIView):
         return Response({'status': 'User activated'}, status=status.HTTP_200_OK)
 
 
-class AuthorizationAPIView(APIView):
+class AuthorizationAPIView(ListAPIView):
+    serializer_class = UserLoginSerializer
+
     def post(self, request, *args, **kwargs):
-        serializer = UserLoginSerializer(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             user = serializer.validated_data
             login(request, user)

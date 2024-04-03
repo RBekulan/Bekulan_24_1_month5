@@ -65,4 +65,3 @@ class ReviewValidatorCreate(serializers.Serializer):
 
 class DirectorValidatorCreate(serializers.Serializer):
     name = serializers.CharField(max_length=150)
-
